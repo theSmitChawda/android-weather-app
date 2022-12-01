@@ -1,5 +1,7 @@
 package com.smitchawda.smitsweatherapp;
 
+import com.smitchawda.smitsweatherapp.secret.ApiKey;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,7 +28,7 @@ public class Weather {
     private String weatherDescription;
 
 
-    private final String apiKey = "d9b82647df4c26aa3ee3fc48a4d2a25a";
+    private final String apiKey = ApiKey.API_KEY.getApiKey();
     private String apiUrl = "";
     private URL url;
     private HttpURLConnection http;

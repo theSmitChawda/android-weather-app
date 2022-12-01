@@ -1,50 +1,23 @@
 package com.smitchawda.smitsweatherapp;
 
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-
-import android.annotation.SuppressLint;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.*;
-
-import com.squareup.picasso.Picasso;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity{
-
     /*---------------------Design Components---------------------*/
-
     //Layout
     ConstraintLayout main_constraint_layout;
-
     //Space holders
     Space space;
     Space space2;
-
     //TextViews
     TextView city;
     TextView temperature;
@@ -52,10 +25,8 @@ public class MainActivity extends AppCompatActivity{
     TextView min_temp;
     TextView max_temp;
     TextView feels_like_temp;
-
     //Images
     ImageView weather_icon;
-
     /*---------------------Logic Variables---------------------*/
     Weather weather = new Weather("Brampton");
     static Map<String, String> data = new HashMap<String, String>();
