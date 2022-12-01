@@ -3,6 +3,7 @@ package com.smitchawda.smitsweatherapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -14,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +35,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity{
+
     /*---------------------Design Components---------------------*/
 
     //Layout
@@ -54,12 +57,16 @@ public class MainActivity extends AppCompatActivity{
     ImageView weather_icon;
 
     /*---------------------Logic Variables---------------------*/
+    Weather weather = new Weather("Brampton");
     static Map<String, String> data = new HashMap<String, String>();
+    int delayTimeInSeconds=5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         onConfigurationChanged(getResources().getConfiguration());
+        WeatherDataThread thread = new WeatherDataThread(delayTimeInSeconds);
+        thread.start();
     }
 
     private void initializeDesignComponents(){
@@ -95,31 +102,32 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-//    class WeatherDataThread extends Thread{
-//        private static final String TAG = "WeatherDataThread";
-//        int seconds=1000;
-//
-//        public WeatherDataThread(int seconds){
-//            this.seconds = seconds*1000;
-//        }
-//
-//        @Override
-//        public void run() {
-//            while(true) {
-//                Log.d(TAG, "run: ");
-//                try {
-//                    System.out.println("\n\n-----Data-----\n\n");
-//                    data = weather.fetchLabelledData();
-//                    applicationLogic();
-//                    Picasso.get().load("https://openweathermap.org/img/wn/"+data.get("icon")+"@2x.png").into(weather_icon);
-//                    weather.fetchLabelledData().forEach((k,v)->{
-//                        System.out.println("Key: "+k+" - Value: "+v);
-//                    });
-//                    Thread.sleep(this.seconds);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//    }
+    class WeatherDataThread extends Thread{
+        private static final String TAG = "WeatherDataThread";
+        int seconds=1000;
+
+        public WeatherDataThread(int seconds){
+            //converting to ms for Thread input
+            this.seconds = seconds*1000;
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        @Override
+        public void run() {
+            while(true) {
+                Log.d(TAG, "run: ");
+                try {
+                    System.out.println("\n\n-----Data-----\n\n");
+                    weather.parseWeatherDataJSON();
+                    data = weather.fetchLabelledData();
+                    weather.fetchLabelledData().forEach((k,v)->{
+                        System.out.println(k+": "+v);
+                    });
+                    Thread.sleep(this.seconds);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
