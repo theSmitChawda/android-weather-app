@@ -54,34 +54,14 @@ public class MainActivity extends AppCompatActivity{
     ImageView weather_icon;
 
     /*---------------------Logic Variables---------------------*/
-    Weather weather;
     static Map<String, String> data = new HashMap<String, String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         onConfigurationChanged(getResources().getConfiguration());
-        initializeDesignComponents();
-        initializeLogicComponents();
-        applicationLogic();
-
-        /* Created a new Thread to collect Weather Data
-         * every 15s without disturbing the main UI thread. */
-//        WeatherDataThread weatherDataThread = new WeatherDataThread(15);
-//        weatherDataThread.start();
     }
 
-    private void applicationLogic(){
-//        city.setText(weather.getCity());
-        temperature.setText(data.get("temperature"));
-        min_temp.setText(data.get("min_temperature"));
-        max_temp.setText(data.get("max_temperature"));
-        feels_like_temp.setText(data.get("feels_like_temperature"));
-        weather_description.setText(data.get("description"));
-        Picasso.get().load("https://openweathermap.org/img/wn/"+data.get("icon")+"@2x.png").into(weather_icon);
-    }
-
-    @SuppressLint("ResourceType")
     private void initializeDesignComponents(){
         try {
             main_constraint_layout = findViewById(R.id.main_constraint_layout);
@@ -101,25 +81,17 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private void initializeLogicComponents(){
-        //TODO Get userlocation and set the city.
-        //TODO weather = new Weather(city);
-        weather = new Weather("Brampton");
-    }
-
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             setContentView(R.layout.activity_main);
             Toast.makeText(MainActivity.this, "Landscape", Toast.LENGTH_SHORT).show();
             initializeDesignComponents();
-            applicationLogic();
         }
         else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             setContentView(R.layout.activity_main);
             Toast.makeText(MainActivity.this, "Potrait", Toast.LENGTH_SHORT).show();
             initializeDesignComponents();
-            applicationLogic();
         }
     }
 
