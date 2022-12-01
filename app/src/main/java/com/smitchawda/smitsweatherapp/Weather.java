@@ -5,7 +5,6 @@ import com.smitchawda.smitsweatherapp.secret.ApiKey;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -27,7 +26,6 @@ public class Weather {
     private String imageId;
     private String weatherDescription;
 
-
     private final String apiKey = ApiKey.API_KEY.getApiKey();
     private String apiUrl = "";
     private URL url;
@@ -35,7 +33,6 @@ public class Weather {
     private int connectionTimeout = 5000;
     private int readTimeout = 5000;
     private BufferedReader in;
-
     private JSONObject jsonObject;
 
     /**
