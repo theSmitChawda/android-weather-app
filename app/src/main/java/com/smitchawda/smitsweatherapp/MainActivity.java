@@ -4,9 +4,14 @@
     import androidx.appcompat.app.AppCompatActivity;
     import androidx.constraintlayout.widget.ConstraintLayout;
     import android.content.res.Configuration;
+    import android.graphics.Bitmap;
+    import android.graphics.BlurMaskFilter;
     import android.os.Build;
     import android.os.Bundle;
     import android.util.Log;
+    import android.view.DragEvent;
+    import android.view.MotionEvent;
+    import android.view.View;
     import android.widget.*;
 
     import com.squareup.picasso.Picasso;
@@ -18,9 +23,7 @@
         /*---------------------Design Components---------------------*/
         //Layout
         ConstraintLayout main_constraint_layout;
-        //Space holders
-        Space space;
-        Space space2;
+
         //TextViews
         TextView city;
         TextView temperature;
@@ -28,8 +31,10 @@
         TextView min_temp;
         TextView max_temp;
         TextView feels_like_temp;
+
         //Images
         ImageView weather_icon;
+
         /*---------------------Logic Variables---------------------*/
         Weather weather = new Weather("Brampton");
         static Map<String, String> data = new HashMap<String, String>();
@@ -41,14 +46,11 @@
             onConfigurationChanged(getResources().getConfiguration());
             WeatherDataThread thread = new WeatherDataThread(delayTimeInSeconds);
             thread.start();
-
         }
 
         private void initializeDesignComponents(){
             try {
                 main_constraint_layout = findViewById(R.id.main_constraint_layout);
-                space = findViewById(R.id.space);
-                space2 = findViewById(R.id.space2);
                 city = findViewById(R.id.city);
                 temperature = findViewById(R.id.temperature);
                 weather_description = findViewById(R.id.weather_description);
@@ -89,12 +91,17 @@
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void run() {
+                String[] city = {"Delhi","Paris","Dubai"};
                 while(true) {
                     Log.d(TAG, "run: WeatherDataThread");
                     try {
                         PaintUIThread painterThread = new PaintUIThread(seconds);
+                        //Testing City changes
+                        int randomNumber = (int) (Math.random()*(3-0));
+                        weather.setCity(city[randomNumber]);
+                        System.out.println("City: "+weather.getCity());
 
-                        System.out.println("\n\n-----Data-----\n\n");
+                        System.out.println("\n-----Data-----\n");
                         weather.parseWeatherDataJSON();
                         data = weather.fetchLabelledData();
                         weather.fetchLabelledData().forEach((k,v)->{
@@ -130,9 +137,8 @@
                         max_temp.setText(data.get("max_temperature"));
                         weather_description.setText(data.get("description"));
                         String str = data.get("icon");
-                        weather_icon.setMinimumWidth(250);
-                        weather_icon.setMinimumHeight(250);
-
+                        weather_icon.setMinimumWidth(350);
+                        weather_icon.setMinimumHeight(350);
                         Picasso.get().load("https://openweathermap.org/img/wn/"+str+"@2x.png").into(weather_icon);
                     });
             }

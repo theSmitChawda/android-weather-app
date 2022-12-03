@@ -42,6 +42,9 @@ public class Weather {
 
     public Weather(String city) {
         this.city = city;
+    }
+
+    public void parseWeatherDataJSON(){
         this.apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+this.city+"&units=metric&appid=" +this.apiKey;
         try {
             this.url = new URL(this.apiUrl);
@@ -49,9 +52,7 @@ public class Weather {
             System.out.println("URL connection failed");
             e.printStackTrace();
         }
-    }
 
-    public void parseWeatherDataJSON(){
         try {
             this.http = (HttpURLConnection) this.url.openConnection();
             this.http.setRequestMethod("GET");
@@ -84,10 +85,10 @@ public class Weather {
     public Map<String, String> fetchLabelledData(){
         JSONObject rootObj = this.jsonObject;
         try {
-            this.temperature =          (Double) rootObj.getJSONObject("main").get("temp");
-            this.feelsLikeTemperature = (Double) rootObj.getJSONObject("main").get("feels_like");
-            this.minTemperature =       (Double) rootObj.getJSONObject("main").get("temp_min");
-            this.maxTemperature =       (Double) rootObj.getJSONObject("main").get("temp_max");
+            this.temperature =          Double.parseDouble(rootObj.getJSONObject("main").get("temp").toString());
+            this.feelsLikeTemperature = Double.parseDouble(rootObj.getJSONObject("main").get("feels_like").toString());
+            this.minTemperature =       Double.parseDouble(rootObj.getJSONObject("main").get("temp_min").toString());
+            this.maxTemperature =       Double.parseDouble(rootObj.getJSONObject("main").get("temp_max").toString());
 
             JSONObject childObj = (JSONObject) rootObj.getJSONArray("weather").get(0);
 

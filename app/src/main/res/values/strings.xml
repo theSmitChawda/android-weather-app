@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Smit\'s Weather App</string>
+    <string name="celsius_symbol">°</string>
 </resources>
