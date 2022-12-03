@@ -9,6 +9,7 @@
     import android.graphics.BlurMaskFilter;
     import android.os.Build;
     import android.os.Bundle;
+    import android.text.format.Time;
     import android.util.Log;
     import android.view.DragEvent;
     import android.view.KeyEvent;
@@ -136,7 +137,6 @@
                     Log.d(TAG, "run: WeatherDataThread");
                     try {
                         PaintUIThread painterThread = new PaintUIThread(seconds);
-
                         System.out.println("\n-----Data-----\n");
                         weather.parseWeatherDataJSON();
                         data = weather.fetchLabelledData();
