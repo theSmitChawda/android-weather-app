@@ -23,6 +23,7 @@ public class Weather {
     private Double feelsLikeTemperature;
     private Double minTemperature;
     private Double maxTemperature;
+    private Double windSpeed;
     private String imageId;
     private String weatherDescription;
 
@@ -89,7 +90,7 @@ public class Weather {
             this.feelsLikeTemperature = Double.parseDouble(rootObj.getJSONObject("main").get("feels_like").toString());
             this.minTemperature =       Double.parseDouble(rootObj.getJSONObject("main").get("temp_min").toString());
             this.maxTemperature =       Double.parseDouble(rootObj.getJSONObject("main").get("temp_max").toString());
-
+            this.windSpeed =            Double.parseDouble(rootObj.getJSONObject("wind").get("speed").toString());
             JSONObject childObj = (JSONObject) rootObj.getJSONArray("weather").get(0);
 
             this.weatherDescription = childObj.getString("description");
@@ -102,6 +103,7 @@ public class Weather {
         this.cleanData.put("min_temperature", this.minTemperature+"");
         this.cleanData.put("max_temperature", this.maxTemperature+"");
         this.cleanData.put("description", this.weatherDescription+"");
+        this.cleanData.put("wind_speed",this.windSpeed+"");
         this.cleanData.put("icon", this.imageId+"");
         return this.cleanData;
     }

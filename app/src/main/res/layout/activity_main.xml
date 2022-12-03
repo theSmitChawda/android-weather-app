@@ -18,6 +18,17 @@
         android:textSize="40sp"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/cityInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/city"
+        android:textSize="40sp"
+        android:text="City"
+        android:textAlignment="center"
+        android:visibility="gone"
+        tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/temperature"
         android:layout_width="match_parent"
@@ -25,7 +36,7 @@
         android:text="20 C"
         android:textAlignment="center"
         android:textSize="80sp"
-        app:layout_constraintTop_toBottomOf="@id/city"
+        app:layout_constraintTop_toBottomOf="@id/cityInput"
         tools:ignore="MissingConstraints" />
     <TextView
         android:id="@+id/weather_description"
@@ -61,14 +72,14 @@
         app:cardElevation="8dp"
         tools:ignore="MissingConstraints">
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/weather_icon"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/max_temp">
             <TextView
                 android:id="@+id/min_temp_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="Minimum Temp."
@@ -77,7 +88,7 @@
                 tools:ignore="MissingConstraints" />
             <TextView
                 android:id="@+id/min_temp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="L: 3"
                 android:textAlignment="center"
@@ -104,13 +115,13 @@
         app:cardElevation="8dp"
         tools:ignore="DuplicateIds,MissingConstraints">
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/weather_icon"
             app:layout_constraintLeft_toRightOf="@id/min_temp_card">
             <TextView
                 android:id="@+id/max_temp_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="Maximum Temp."
@@ -119,7 +130,7 @@
                 tools:ignore="MissingConstraints" />
             <TextView
                 android:id="@+id/max_temp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="H: 7"
                 android:textAlignment="center"
@@ -140,13 +151,13 @@
         app:cardCornerRadius="16dp"
         android:background="@color/teal_700"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/wind_temp_card"
         app:layout_constraintTop_toBottomOf="@id/min_temp_card"
         android:layout_marginTop="16dp"
         app:cardElevation="8dp"
         tools:ignore="DuplicateIds,MissingConstraints">
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/weather_icon"
             app:layout_constraintLeft_toRightOf="@id/min_temp_card">
@@ -172,6 +183,48 @@
                 tools:ignore="MissingConstraints" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
+<!--    Wind Speed-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/wind_temp_card"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        android:background="@color/teal_700"
+        android:padding="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/feels_like_temp_card"
+        app:layout_constraintTop_toBottomOf="@id/max_temp_card"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        app:cardElevation="8dp"
+        tools:ignore="DuplicateIds,MissingConstraints">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/weather_icon"
+            app:layout_constraintLeft_toRightOf="@id/min_temp_card">
+            <TextView
+                android:id="@+id/wind_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Wind Speed"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/wind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="H: 7"
+                android:textAlignment="center"
+                android:textSize="40sp"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/wind_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:ignore="MissingConstraints" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
