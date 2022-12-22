@@ -1,6 +1,8 @@
 # weather-application-android
 ## A simple android Weather Application with a great UI 
 
+Note: Data currently updates every 1 second.
+
 
 ![Screenshot_2022 12 03_19 22 35 004](https://user-images.githubusercontent.com/59838606/209037042-aea0f27f-e216-41b2-925f-0e701e0fbdfe.png)
 
